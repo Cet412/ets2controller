@@ -1,0 +1,59 @@
+<ControllerLayout>:
+    canvas.before:
+        Color:
+            rgba: 0.1, 0.1, 0.1, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    Label:
+        text: "ETS2 Android Steering Controller"
+        font_size: 24
+        color: 1, 1, 1, 1
+        pos_hint: {"x": 0.05, "y": 0.85}
+        size_hint: 0.9, 0.1
+
+    Button:
+        id: bluetooth_btn
+        background_normal: "bluetooth.png"
+        size_hint: None, None
+        size: 50, 50
+        pos_hint: {"right": 1, "top": 1}
+        on_press: root.try_connect_bluetooth()
+
+    Image:
+        id: steering_wheel
+        source: "steering_wheel.png"
+        size_hint: None, None
+        size: 150, 150
+        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+        allow_stretch: True
+        keep_ratio: True
+
+    Slider:
+        id: steering_slider
+        min: 0
+        max: 1
+        value: 0.5
+        orientation: 'horizontal'
+        size_hint: 0.8, 0.1
+        pos_hint: {"center_x": 0.5, "y": 0.3}
+        on_value: root.on_steering_change(self.value)
+
+    Button:
+        id: gas_btn
+        background_normal: "gas.png"
+        size_hint: None, None
+        size: 100, 50
+        pos_hint: {"center_x": 0.7, "center_y": 0.7}
+        on_press: root.on_gas_press()
+        on_release: root.reset_gas_color()
+
+    Button:
+        id: brake_btn
+        background_normal: "brake.png"
+        size_hint: None, None
+        size: 100, 50
+        pos_hint: {"center_x": 0.9, "center_y": 0.7}
+        on_press: root.on_brake_press()
+        on_release: root.reset_brake_color()
